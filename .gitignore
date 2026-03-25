@@ -4,3 +4,4 @@ __pycache__/
 .env
 voice.mp3
 *.log
+.vscode/
