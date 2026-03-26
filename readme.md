@@ -1,122 +1,105 @@
-Nova : Nova is a Python-based voice assistant that can listen to your voice, process commands, and respond intelligently using AI.
-Features: 
-🎤 Voice input using SpeechRecognition
-🔊 Text-to-Speech response
-🤖 AI-powered responses (Gemini API)
-⚡ FastAPI backend support
-🌐 CORS enabled for frontend integration
+🧠 NOVA — Intelligent Local AI Assistant
 
-Tech Stack
-Python 3.11 #cause pyaudio is not available in latest version
-FastAPI
-SpeechRecognition
-PyAudio
-Google Generative AI (Gemini)
-Uvicorn
+🚀 Overview
 
-Project Structure
+NOVA is a fully local, voice-enabled AI assistant built in Python that processes commands, interacts with users using natural language, and generates intelligent responses using locally hosted LLMs via Ollama.
+
+Unlike traditional assistants, NOVA prioritizes privacy, speed, and offline capability, making it a powerful personal AI system.
+
+🎯 Key Highlights
+🧠 Local AI Processing (No cloud dependency)
+🎤 Real-time Voice Recognition
+🔊 Human-like Voice Responses
+⚡ Fast & Lightweight Execution
+🔐 Privacy-Focused Architecture
+🧩 Modular & Easily Extendable
+🛠️ Tech Stack
+Technology	                      Purpose
+Python 3.11.0	                Core Development
+speech_recognition	            Voice Input
+pyttsx3	                        Text-to-Speech
+pyaudio	                        Microphone Handling
+requests                    	API Communication
+Ollama	                        Local LLM Integration
+
+📂 Project Structure
 Nova/
-│── main.py
-│── requirements.txt
-│── .env
-│── README.md
-
-⚙️ Setup Instructions
-1️⃣ Clone the repository
-git clone <your-repo-link>
+│── main.py              # Main execution file
+│── nova_ollama.py       # Handles AI model interaction
+│── musiclib.py          # Music control logic
+│── requirements.txt     # Dependencies
+│── README.md            # Documentation
+⚙️ Installation & Setup
+1. Clone Repository
+git clone https://github.com/garvmanchal/Nova.git
 cd Nova
-2️⃣ Create Virtual Environment
-python -m venv .venv
-.venv\Scripts\activate
-3️⃣ Install Dependencies
+2. Create Virtual Environment
+python -m venv venv
+venv\Scripts\activate
+3. Install Dependencies
 pip install -r requirements.txt
-4️⃣ Add Environment Variables
+4. Setup Ollama (Local AI)
 
-Create a .env file and add:
+Download from:
+👉 https://ollama.com
 
-GEMINI_API_KEY=your_api_key_here
+Run model:
 
-5️⃣ Run the Project
+ollama run gemma:2b or ollama run llama3
+▶️ Running NOVA
 python main.py
 
-🎯 Usage
-Run the script
-Speak into your microphone
-Nova will listen and respond
-🧠 Challenges Faced
-PyAudio installation issues on Python 3.13
-Resolved by using Python 3.11 and virtual environments
-📌 Future Improvements
-GUI integration
-Better command recognition
-Multi-language support
-Deployment on cloud
+🎙️ Say the wake word:
+
+Nova
+🧠 How NOVA Works
+Voice Input → Speech Recognition → Command Processing → AI Response → Voice Output
+Listens continuously for wake word
+Converts speech into text
+Sends query to local AI model
+Generates intelligent response
+Speaks response back to user
+🔐 Privacy & Performance
+Feature	NOVA	Cloud Assistants
+Internet Required	❌	✅
+Data Privacy	✅ Full Control	❌ Limited
+Speed	⚡ Fast	🌐 Depends on network
+🚧 Future Enhancements
+🖥️ GUI Interface (Web / Desktop)
+🧠 Context Memory (Conversation history)
+🎯 Custom Wake Word Detection
+📱 App Integration (WhatsApp, Spotify, etc.)
+🌐 API Integrations (Weather, News)
+🗣️ Advanced Voice Models
+💼 Use Cases
+Personal AI Assistant
+Offline Chatbot System
+AI Learning Project
+Voice Automation Tool
+🤝 Contributing
+
+Contributions are welcome!
+
+1. Fork the repo
+2. Create a new branch
+3. Commit changes
+4. Submit a PR
+📜 License
+
+This project is licensed under the MIT License.
+
 👨‍💻 Author
 
 Garv Manchal
+BTech CSE | Aspiring Data Scientist | AI Builder
 
-⭐ Acknowledgements
-Python community
-OpenAI / Google AI
-SpeechRecognition library
+⭐ Show Your Support
 
-import speech_recognition as sr
-import webbrowser
-import pyttsx3
-import pyaudio
-import time
+If you like this project:
 
-r = sr.Recognizer()
-engine = pyttsx3.init()
+⭐ Star the repository
+🍴 Fork it
+🚀 Share it
+🧠 Vision
 
-def speak(text):
-    engine.say(text)
-    engine.runAndWait()
-
-def processCommand(c):
-    if "open google" in c.lower():
-        webbrowser.open("https://google.com")
-    elif "open instagram" in c.lower():
-        webbrowser.open("https://instagram.com")
-    elif "open youtube" in c.lower():
-        webbrowser.open("https://youtube.com")
-    elif "open github" in c.lower():
-        webbrowser.open("https://github.com")
-    
-
-if __name__ == "__main__" :
-    speak(" Initializing Nova......")
-    
-    while True :
-        # listen for the wake word Nova
-        print("Recognizing....")
-
-        try:
-            with sr.Microphone() as source:
-                print("Nova is listening...")
-                audio = r.listen( source,timeout=5,phrase_time_limit=2)
-
-            word = r.recognize_google(audio)
-            print("Detected Word: ",word)
-
-
-            if (word.lower() == "nova"):
-                print("wake word detected")
-                speak("Hii Grvv")
-                time.sleep(1)
-
-                #Listen for command
-                with sr.Microphone() as source:
-                    print("Nova Active...")
-                    audio = r.listen(source)
-                    command = r.recognize_google(audio)
-                    processCommand(command)
-                    print(command)
-           
-                    
-
-                    
-
-        except Exception as e :
-            print("error; {0}".format(e))
-
+"To build a fully autonomous, privacy-first AI assistant that rivals cloud-based systems — completely offline."
