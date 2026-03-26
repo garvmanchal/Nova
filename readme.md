@@ -91,7 +91,8 @@ This project is licensed under the MIT License.
 👨‍💻 Author
 
 Garv Manchal
-BTech CSE | Aspiring Data Scientist | AI Builder
+
+BTech CSE | Python/Backend Developer | FastAPIs | AI Developer
 
 ⭐ Show Your Support
 
